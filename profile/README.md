@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://diagrammo.app">
-    <img src="https://diagrammo.app/og-image.png" alt="Diagrammo — diagrams as code" width="720">
+    <img src="hero.png" alt="Diagrammo — diagrams as code" width="900">
   </a>
 </p>
 
