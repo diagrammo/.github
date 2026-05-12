@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://diagrammo.app">
+    <img src="https://diagrammo.app/og-image.png" alt="Diagrammo — diagrams as code" width="720">
+  </a>
+</p>
+
 # Diagrammo
 
 **Simple text in. Brilliant diagrams out.**
