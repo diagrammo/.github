@@ -1,0 +1,51 @@
+name: Render the profile hero
+
+# profile/hero.dgmo is the source; profile/hero.png is a build artifact.
+# Committing a render and never repeating it is how the previous hero ended up
+# three months and forty dgmo releases out of date. This job repeats it.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['profile/hero.dgmo']
+  schedule:
+    # Mondays, 07:00 UTC — picks up any renderer change since the last run
+    - cron: '0 7 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Deliberately unpinned: the point of this job is to track whatever the
+      # renderer does today, so a palette or typography change lands on the org
+      # page instead of aging out of it.
+      - name: Install the dgmo CLI
+        run: npm install -g @diagrammo/dgmo-cli@latest
+
+      - name: Report the renderer version
+        run: dgmo --version
+
+      - name: Render profile/hero.dgmo
+        run: dgmo profile/hero.dgmo -o profile/hero.png
+
+      - name: Commit if the pixels changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- profile/hero.png; then
+            echo "Hero is already current — nothing to commit."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Re-render the profile hero at dgmo $(dgmo --version) [skip ci]" -- profile/hero.png
+          git push

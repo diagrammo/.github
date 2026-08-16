@@ -1,7 +1,11 @@
 <p align="center">
   <a href="https://diagrammo.app">
-    <img src="hero.png" alt="Diagrammo — diagrams as code" width="900">
+    <img src="hero.png" alt="A sequence diagram of signing in with a one-time code — a user, a web app, an auth API and a session database exchanging eight messages" width="900">
   </a>
+</p>
+
+<p align="center">
+  <sub>Rendered from <a href="https://github.com/diagrammo/.github/blob/main/profile/hero.dgmo">its DGMO source</a> by <a href="https://github.com/diagrammo/.github/blob/main/.github/workflows/render-hero.yml">a job that re-renders it</a> — so it never falls behind the renderer.</sub>
 </p>
 
 # Diagrammo

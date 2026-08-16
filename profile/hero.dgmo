@@ -1,0 +1,20 @@
+sequence Sign in with a one-time code
+legend-inline
+
+tag Concern as c
+  Auth blue
+  Email orange
+
+User
+WebApp
+AuthAPI
+SessionDB
+
+User -enter your email-> WebApp
+WebApp -POST /code-> AuthAPI c: Auth
+AuthAPI -store the challenge-> SessionDB c: Auth
+AuthAPI ~six digits, valid 10 min~> User c: Email
+User -enter the code-> WebApp
+WebApp -POST /verify-> AuthAPI c: Auth
+AuthAPI -mark verified-> SessionDB c: Auth
+AuthAPI -session cookie-> User c: Auth
