@@ -35,17 +35,22 @@ jobs:
       - name: Report the renderer version
         run: dgmo --version
 
+      # Both themes: the README serves them through a <picture> element, so a
+      # visitor on GitHub's dark theme gets the dark render.
       - name: Render profile/hero.dgmo
-        run: dgmo profile/hero.dgmo -o profile/hero.png
+        run: |
+          set -euo pipefail
+          dgmo profile/hero.dgmo -o profile/hero.png
+          dgmo profile/hero.dgmo -o profile/hero-dark.png --theme dark
 
       - name: Commit if the pixels changed
         run: |
           set -euo pipefail
-          if git diff --quiet -- profile/hero.png; then
+          if git diff --quiet -- profile/hero.png profile/hero-dark.png; then
             echo "Hero is already current — nothing to commit."
             exit 0
           fi
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "Re-render the profile hero at dgmo $(dgmo --version) [skip ci]" -- profile/hero.png
+          git commit -m "Re-render the profile hero at dgmo $(dgmo --version) [skip ci]" -- profile/hero.png profile/hero-dark.png
           git push
