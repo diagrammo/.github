@@ -38,6 +38,6 @@ Author diagrams as code with the DGMO language. Render to SVG/PNG. Use it in the
 
 ## What you can render
 
-35+ chart types — flowcharts, sequence, gantt, kanban, ER, class, C4, org, infrastructure, sitemaps, sankey, treemap, sunburst, radar, slope, arc, timeline, wordcloud, venn, quadrant, and more.
+50+ chart types — flowcharts, sequence, gantt, kanban, ER, class, C4, org, infrastructure, sitemaps, sankey, treemap, sunburst, radar, slope, arc, timeline, wordcloud, venn, quadrant, and more.
 
 [See it in action →](https://diagrammo.app)
